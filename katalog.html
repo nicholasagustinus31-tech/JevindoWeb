@@ -725,6 +725,44 @@ await import("//www.bluettipower.id/cdn/shopifycloud/shop-js/modules/v2/chunk.co
 
 
 <style>
+  .wa_float_icon{
+	position:fixed;
+	z-index:1000;
+	right:20px;
+	bottom:20px;
+	cursor:pointer;
+}
+.wa_float_icon img{
+	max-width:150px;
+}
+
+/* Tampilkan logo panjang untuk PC, sembunyikan logo mobile */
+.displayd {
+    display: block;
+}
+
+.displaym {
+    display: none;
+}
+
+/* Pada layar mobile (max-width: 768px) */
+@media screen and (max-width: 768px) {
+    /* Sembunyikan logo panjang */
+    .displayd {
+        display: none;
+    }
+    
+    /* Tampilkan logo mobile */
+    .displaym {
+        display: block;
+    }
+    
+    /* Perkecil logo mobile */
+    .displaym img {
+        width: 45px;  /* Sesuaikan ukuran ini */
+        height: auto;
+    }
+}
   .public-layout-area {
     display: none;
   }
@@ -1784,9 +1822,6 @@ await import("//www.bluettipower.id/cdn/shopifycloud/shop-js/modules/v2/chunk.co
   </h1>
 </div>
 
-
- 
-
           <div class="uk-flex">
             <button class="uk-offcanvas-close" type="button" uk-close></button>
           </div>
@@ -1960,7 +1995,33 @@ await import("//www.bluettipower.id/cdn/shopifycloud/shop-js/modules/v2/chunk.co
 
 
 </section>
-
+<script>
+	function close_popup_quickbuy(){
+		document.getElementById('popupindex_qb').style.display='none';
+		document.getElementById('menuslidebackpart_qb').style.display='none';
+	}
+	function quickbuy_open(id){
+		document.getElementById('popupindex_qb').style.display='block';
+		document.getElementById('menuslidebackpart_qb').style.display='block';
+        if(type=="chatwithus"){
+            document.getElementById('iframe_qb').src="/chatwithus.php?language=en";
+            //alert("/chatwithus.php?language=en");
+        }
+        else{
+            document.getElementById('iframe_qb').src="/buynow.php?id="+id+"&language=en";
+            //alert("/buynow.php?id="+id+"&language=en");
+        }
+	}
+	</script>
+    
+    
+    
+    <div class="">
+    	<div class="wa_float_icon">
+        	<div class="displayd"><a href="https://wa.me/628119707768" target="_blank"><img src="images/wa_float_long.png" /></a></div>
+          <div class="displaym"><a href="https://wa.me/628119707768" target="_blank"><img src="/images/wa_float.png" /></a></div>
+        </div>
+    </div>
     
  <div class="search-hero">
         <div class="search-container">
@@ -2823,13 +2884,13 @@ await import("//www.bluettipower.id/cdn/shopifycloud/shop-js/modules/v2/chunk.co
                 badge: "READY",
                 image: "images/ac2p+solarpanel.png",
                 shopeeLink: "https://shopee.co.id/BLUETTI-AC2P-Portable-Power-Station-300W-230-4Wh-Solar-Panel-SP200L-i.1444907295.29435275264?extraParams=%7B%22display_model_id%22%3A188480398470%7D",
-                tokopediaLink: "https://www.tokopedia.com/jevindo-indonesia-store/bluetti-portable-power-station-ac2p-300w-230-4wh-power-bank-ac2p-only-1730737661657449793?extParam=src%3Dshop%26whid%3D18052599&aff_unique_id=&channel=others&chain_key=",
+                tokopediaLink: "https://www.tokopedia.com/jevindo-indonesia-store",
                 searchTerms: "ac2p 300w 230wh solar generator kit sp200l"
             },
             {
                 name: "BLUETTI AC200PL Expandable Power Station | 2400W 2304Wh",
                 category: "portable",
-                price: "Rp 20.889.900",
+                price: "Rp 16.099.895",
                 badge: "READY",
                 image: "images/AC200PL.png",
                 shopeeLink: "https://shopee.co.id/BLUETTI-AC200PL-Portable-Power-Station-2400W-2304Wh-i.1444907295.26278305915?extraParams=%7B%22display_model_id%22%3A159048368539%7D",
@@ -2839,11 +2900,11 @@ await import("//www.bluettipower.id/cdn/shopifycloud/shop-js/modules/v2/chunk.co
             {
                 name: "BLUETTI AC200PL + SP200L | 2400W 2304Wh",
                 category: "solar",
-                price: "Rp 24.879.900",
+                price: "Rp 20.889.900",
                 badge: "READY",
                 image: "images/ac200pl+solarpanel.png",
                 shopeeLink: "https://shopee.co.id/BLUETTI-AC200PL-Expandable-Power-Station-2400W-2304Wh-Solar-Panel-AC200PL-SP200L-i.1444907295.26535271577?extraParams=%7B%22display_model_id%22%3A198480418513%7D",
-                tokopediaLink: "https://www.tokopedia.com/jevindo-indonesia-store/bluetti-ac200pl-portable-power-station-2400w-2304wh?extParam=src%3Dshop%26whid%3D18052599&aff_unique_id=&channel=others&chain_key=",
+                tokopediaLink: "https://www.tokopedia.com/jevindo-indonesia-store",
                 searchTerms: "ac200pl 2400w 2304wh solar generator kit sp200l"
             },
             {
@@ -2873,7 +2934,7 @@ await import("//www.bluettipower.id/cdn/shopifycloud/shop-js/modules/v2/chunk.co
                 badge: "READY",
                 image: "images/CHARGEPORTABLE_CABLE.png",
                 shopeeLink: "https://shopee.co.id/BLUETTI-Charger-1-Charge-Portable-Power-Station-While-Driving-i.1444907295.40508965659?extraParams=%7B%22display_model_id%22%3A253637432948%7D",
-                tokopediaLink: "https://www.tokopedia.com/jevindo-indonesia-store/search?q=bluetti+charger+1",
+                tokopediaLink: "https://www.tokopedia.com/jevindo-indonesia-store/product",
                 searchTerms: "car charger portable power station"
             },
             {
@@ -2883,7 +2944,7 @@ await import("//www.bluettipower.id/cdn/shopifycloud/shop-js/modules/v2/chunk.co
                 badge: "READY",
                 image: "images/EB3A_POWERBANK.webp",
                 shopeeLink: "https://shopee.co.id/BLUETTI-EB3A-Portable-Power-Station-600W-268Wh-i.1444907295.28778336054?extraParams=%7B%22display_model_id%22%3A252790896952%7D",
-                tokopediaLink: "https://www.tokopedia.com/jevindo-indonesia-store/search?q=bluetti+eb3a",
+                tokopediaLink: "https://www.tokopedia.com/jevindo-indonesia-store/product",
                 searchTerms: "eb3a 600w 268wh portable power station"
             },
             {
@@ -2913,15 +2974,15 @@ await import("//www.bluettipower.id/cdn/shopifycloud/shop-js/modules/v2/chunk.co
                 badge: "READY",
                 image: "images/CARRYINGBAG.jpg",
                 shopeeLink: "https://shopee.co.id/BLUETTI-Carrying-Bag-For-Powe-Station-AC2P-EB3A-AC70P-Tas-Untuk-Menyimpan-Powe-Station-EB3A-EB55-EB70-AC60-i.1444907295.28681705136?extraParams=%7B%22display_model_id%22%3A188376335900%7D",
-                tokopediaLink: "https://www.tokopedia.com/jevindo-indonesia-store/search?q=bluetti+carrying+bag",
+                tokopediaLink: "https://www.tokopedia.com/jevindo-indonesia-store",
                 searchTerms: "carrying bag tas power station"
             },
             {
                 name: "BLUETTI B500 Expansion Battery | 4960Wh",
                 category: "battery",
-                price: "Rp 22.999.000",
+                price: "Rp 73.500.000",
                 badge: "READY",
-                image: "images/B500K.webp",
+                image: "images/b500.webp",
                 shopeeLink: "https://shopee.co.id/jevindo_id?categoryId=100010&entryPoint=ShopByPDP&itemId=28681705136&upstream=search",
                 tokopediaLink: "https://www.tokopedia.com/jevindo-indonesia-store/bluetti-b500-expansion-battery-4960wh-daya-listrik?extParam=whid%3D18052599%26src%3Dshop&aff_unique_id=&channel=others&chain_key=",
                 searchTerms: "b500 4960wh expansion battery"
