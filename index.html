@@ -1311,6 +1311,19 @@ await import("//www.bluettipower.id/cdn/shopifycloud/shop-js/modules/v2/chunk.co
     outline-offset:0;
     box-shadow: none;
   }
+  .predictive-search-results-item a:hover {
+  color: #00b4ff !important;
+  padding-left: 8px;
+}
+
+.predictive-search-results-item li {
+  transition: all 0.2s ease;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.predictive-search-results-item li:hover {
+  background: #f8f9fa;
+}
   
   @media (min-width: 1200px) {
 
@@ -1420,6 +1433,131 @@ await import("//www.bluettipower.id/cdn/shopifycloud/shop-js/modules/v2/chunk.co
       font-size: 0.875rem;
     }
   }
+
+  .header-search-box .uk-section-default {
+  background: #fff !important;
+}
+
+.header-search-box {
+  left: 0 !important;
+  top: 0 !important;
+}
+
+.search-box-cover {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 64px;
+  left: 0;
+  background-color: rgba(0, 0, 0, .6);
+  z-index: -1;
+  display: block;
+}
+
+.predictive-search-content a {
+  color: #000 !important;
+}
+
+.predictive-search-content {
+  padding: 0 20px;
+}
+
+.predictive-search-content .uk-search-input {
+  padding: 0 30px;
+}
+
+.predictive-search-content .uk-search-input:focus {
+  outline-offset: 0;
+  box-shadow: none;
+}
+
+#predictive-search,
+#recommend-search {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  width: 100%;
+  margin-top: 15px;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  max-height: 400px;
+  overflow-y: auto;
+  display: none;
+  z-index: 1000;
+}
+
+@media (min-width: 1200px) {
+  #predictive-search,
+  #recommend-search {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.predictive-search-results-item {
+  padding: 20px 30px;
+  border-top: 1px solid #C9C9C9;
+}
+
+.predictive-search-results-item:first-child {
+  border-top: none;
+}
+
+.predictive-search-results-item p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.predictive-search-results-item ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.predictive-search-results-item li {
+  list-style: none;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.predictive-search-results-item li:last-child {
+  border-bottom: none;
+}
+
+.predictive-search-results-item li a {
+  transition: all 0.2s ease;
+  display: block;
+}
+
+.predictive-search-results-item li a:hover {
+  color: #00b4ff !important;
+  padding-left: 5px;
+}
+
+.predictive-search-results-item h3 {
+  font-size: 1rem;
+  color: #C9C9C9 !important;
+  letter-spacing: 0px;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+@media (max-width: 1200px) {
+  .predictive-search-results-item {
+    padding: 10px 15px;
+  }
+
+  .predictive-search-results-item h3 {
+    font-size: .875rem;
+    padding: 5px 0;
+    margin: 0 0 10px 0;
+  }
+
+  .predictive-search-results-item p {
+    font-size: .875rem;
+  }
+}
 </style><button class="uk-navbar-toggle uk-hidden@l" uk-toggle="target: #nav-offcanvas;" uk-navbar-toggle-icon></button>
 </div>
 
@@ -3423,7 +3561,127 @@ Bekerja dengan cukup baik, saya mendapatkan 65 watt dari genset bertenaga surya 
   </div>
 </div>
 
-
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Data produk dari katalog (sama dengan yang di katalog.html)
+  const catalogProducts = [
+    { name: "BLUETTI AC70P Portable Power Station | 1000W 864Wh", url: "katalog.html#ac70p" },
+    { name: "BLUETTI EB3A + SP200 Solar Panel | 600W 268Wh", url: "katalog.html#eb3a-solar" },
+    { name: "BLUETTI Portable Power Station AC2P | 300W 230.4Wh", url: "katalog.html#ac2p" },
+    { name: "BLUETTI AC50P Portable Power Station | 700W 504Wh", url: "katalog.html#ac50p" },
+    { name: "BLUETTI AC70P + Solar Panel SP200L | 1000W 864Wh", url: "katalog.html#ac70p-solar" },
+    { name: "BLUETTI PV100D | 100W Solar Panel", url: "katalog.html#pv100d" },
+    { name: "BLUETTI PV350S Solar Panel | 350W", url: "katalog.html#pv350s" },
+    { name: "BLUETTI EB3A/EB70 Car Charging Cable", url: "katalog.html#car-cable" },
+    { name: "BLUETTI B300K Expansion Battery | 2764.8Wh", url: "katalog.html#b300k" },
+    { name: "BLUETTI AC180P + Solar Panel SP200L | 1800W 1440Wh", url: "katalog.html#ac180p-solar" },
+    { name: "BLUETTI AC180P Solar Portable Power Station | 1800W 1440Wh", url: "katalog.html#ac180p" },
+    { name: "BLUETTI SP200L Portable Solar Panel | 200W", url: "katalog.html#sp200l" },
+    { name: "BLUETTI AC2P + Solar Panel SP200L | 300W 230.4Wh", url: "katalog.html#ac2p-solar" },
+    { name: "BLUETTI AC200PL Expandable Power Station | 2400W 2304Wh", url: "katalog.html#ac200pl" },
+    { name: "BLUETTI AC200PL + SP200L | 2400W 2304Wh", url: "katalog.html#ac200pl-solar" },
+    { name: "BLUETTI Apex 300 All in One | 3840W + Battery 2764.8Wh", url: "katalog.html#apex300" },
+    { name: "BLUETTI DC Charging Enhancer D050S", url: "katalog.html#d050s" },
+    { name: "BLUETTI Charger 1 | Charge While Driving", url: "katalog.html#charger1" },
+    { name: "BLUETTI EB3A Portable Power Station | 600W 268Wh", url: "katalog.html#eb3a" },
+    { name: "BLUETTI Premium 30 V2 Power Station", url: "katalog.html#premium30" },
+    { name: "BLUETTI EB3A Solar Charging Cable", url: "katalog.html#eb3a-cable" },
+    { name: "BLUETTI Carrying Bag For Power Station", url: "katalog.html#carrying-bag" },
+    { name: "BLUETTI B500 Expansion Battery | 4960Wh", url: "katalog.html#b500" }
+  ];
+  
+  function initPredictiveSearch(inputId, resultsId, recommendId) {
+    const input = document.getElementById(inputId);
+    const resultsDiv = document.getElementById(resultsId);
+    const recommendDiv = document.getElementById(recommendId);
+    
+    if (!input) return;
+    
+    // Show recommend on focus if empty
+    input.addEventListener('focus', function() {
+      if (this.value.trim() === '') {
+        if (recommendDiv) recommendDiv.style.display = 'block';
+        if (resultsDiv) resultsDiv.style.display = 'none';
+      }
+    });
+    
+    // Search on input
+    input.addEventListener('input', function() {
+      const query = this.value.toLowerCase().trim();
+      
+      if (query === '') {
+        if (resultsDiv) resultsDiv.style.display = 'none';
+        if (recommendDiv) recommendDiv.style.display = 'block';
+        return;
+      }
+      
+      // Filter products
+      const filtered = catalogProducts.filter(p => 
+        p.name.toLowerCase().includes(query)
+      );
+      
+      if (filtered.length > 0) {
+        let html = '<div class="predictive-search-results-item"><h3>Hasil Pencarian</h3><ul>';
+        filtered.slice(0, 5).forEach(product => { // Batasi 5 hasil
+          html += `<li><a href="${product.url}"><p>${product.name}</p></a></li>`;
+        });
+        html += '</ul>';
+        
+        // Tambah link "Lihat Semua" jika hasil lebih dari 5
+        if (filtered.length > 5) {
+          html += `<div style="text-align: center; padding: 10px;">
+            <a href="katalog.html?search=${encodeURIComponent(query)}" style="color: #00b4ff; font-weight: 600;">
+              Lihat Semua ${filtered.length} Hasil →
+            </a>
+          </div>`;
+        }
+        
+        html += '</div>';
+        
+        if (resultsDiv) {
+          resultsDiv.innerHTML = html;
+          resultsDiv.style.display = 'block';
+        }
+        if (recommendDiv) recommendDiv.style.display = 'none';
+      } else {
+        if (resultsDiv) {
+          resultsDiv.innerHTML = `
+            <div class="predictive-search-results-item">
+              <p style="color: #999;">Produk tidak ditemukan untuk "${query}"</p>
+              <a href="katalog.html" style="color: #00b4ff; display: block; margin-top: 10px;">
+                Lihat Semua Produk →
+              </a>
+            </div>`;
+          resultsDiv.style.display = 'block';
+        }
+        if (recommendDiv) recommendDiv.style.display = 'none';
+      }
+    });
+  }
+  
+  // Initialize untuk desktop
+  initPredictiveSearch('Search', 'predictive-search', 'recommend-search');
+  
+  // Close when click outside
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.uk-search')) {
+      document.querySelectorAll('#predictive-search, #recommend-search').forEach(el => {
+        el.style.display = 'none';
+      });
+    }
+  });
+  
+  // Close dropdown on close button
+  const searchBoxCover = document.querySelector('.search-box-cover');
+  if (searchBoxCover) {
+    searchBoxCover.addEventListener('click', function() {
+      document.querySelectorAll('#predictive-search, #recommend-search').forEach(el => {
+        el.style.display = 'none';
+      });
+    });
+  }
+});
+</script>
     
 </body>
 </html>

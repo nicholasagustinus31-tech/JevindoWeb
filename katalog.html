@@ -3773,5 +3773,27 @@ if (menu.classList.contains('active')) {
   customElements.define('back-to-top', backToTop);
 </script>
 
+<script>
+// Handle search query dari URL
+document.addEventListener('DOMContentLoaded', function() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const searchQuery = urlParams.get('search');
+  
+  if (searchQuery) {
+    // Set value ke search input
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+      searchInput.value = searchQuery;
+      // Trigger search
+      searchProducts();
+      // Scroll ke hasil
+      setTimeout(() => {
+        document.querySelector('.catalog-container').scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  }
+});
+</script>
+
 </body>
 </html>
